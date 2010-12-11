@@ -1,9 +1,60 @@
 use strict;
 use warnings;
 package Cave::Wrapper;
+BEGIN {
+  $Cave::Wrapper::VERSION = '0.01000002';
+}
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 #
+
+
+
+
+use Moose;
+use namespace::autoclean;
+use Carp qw();
+
+
+sub _cave_exec_to_list {
+    my @args = @_ ;
+    my $fh;
+    ## no critic ( ProhibitPunctuationVars )
+    open $fh, q{-|}, 'cave' , @args or Carp::croak("Error executing 'cave': $@ $? $!");
+    my ( @output) = <$fh>;
+    close $fh or Carp::carp("Closing 'cave' returned an error: $@ $? $!");
+    chomp for @output;
+    return @output;
+}
+my %collisions = map { $_ => 1 } qw( import );
+
+for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
+    my $method = $command;
+    ## no critic ( RegularExpressions )
+    $method =~ s{-}{_}g;
+    if( exists $collisions{$command} ){
+        $method = 'cave_' . $method;
+    }
+    __PACKAGE__->meta->add_method( $method , sub {
+            my $self = shift;
+            return _cave_exec_to_list( $command, @_ );
+    });
+}
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
+
+=head1 VERSION
+
+version 0.01000002
 
 =head1 DESCRIPTION
 
@@ -14,14 +65,11 @@ This module is designed as a syntactic sugar wrapper for that client to minimise
     my $cave = Cave::Wrapper->new();
     my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
 
-
 =head1 METHODS
 
 Methods are generated entirely at run-time by introspecting the output from C<cave print-commands --all> and then
 generating the appropriate methods. This is mostly because we don't want to have to cut a new release every time
 paludis produce a new release I<just> to avoid breaking code.
-
-=cut
 
 =head1 CAVEATS
 
@@ -37,8 +85,6 @@ Hyphenated commands can't be used as method names in Perl, so we've translated t
 in the method names.
 
 i.e.: if you wanted C<print-ids> you now want C<print_ids>
-
-=cut
 
 =head2 Slightly Underpowered
 
@@ -87,38 +133,16 @@ is a key and what is a value, so adding '--' to the front of them becomes imposs
 
 =back
 
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-use Moose;
-use namespace::autoclean;
-use Carp qw();
-
-
-sub _cave_exec_to_list {
-    my @args = @_ ;
-    my $fh;
-    ## no critic ( ProhibitPunctuationVars )
-    open $fh, q{-|}, 'cave' , @args or Carp::croak("Error executing 'cave': $@ $? $!");
-    my ( @output) = <$fh>;
-    close $fh or Carp::carp("Closing 'cave' returned an error: $@ $? $!");
-    chomp for @output;
-    return @output;
-}
-my %collisions = map { $_ => 1 } qw( import );
-
-for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
-    my $method = $command;
-    ## no critic ( RegularExpressions )
-    $method =~ s{-}{_}g;
-    if( exists $collisions{$command} ){
-        $method = 'cave_' . $method;
-    }
-    __PACKAGE__->meta->add_method( $method , sub {
-            my $self = shift;
-            return _cave_exec_to_list( $command, @_ );
-    });
-}
-
-__PACKAGE__->meta->make_immutable;
-no Moose;
-1;

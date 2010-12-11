@@ -1,0 +1,99 @@
+NAME
+    Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
+
+VERSION
+    version 0.01000002
+
+DESCRIPTION
+    "cave" is a package management client for the Paludis
+    <http://paludis.pioto.org/> package manager available for use with both
+    the Exherbo Linux <http://exherbo.org/> and Gentoo Linux
+    <http://gentoo.org/> Distributions.
+
+    This module is designed as a syntactic sugar wrapper for that client to
+    minimise development time and clarify code.
+
+        my $cave = Cave::Wrapper->new();
+        my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
+
+METHODS
+    Methods are generated entirely at run-time by introspecting the output
+    from "cave print-commands --all" and then generating the appropriate
+    methods. This is mostly because we don't want to have to cut a new
+    release every time paludis produce a new release *just* to avoid
+    breaking code.
+
+CAVEATS
+  Naming Collisions
+    There exists 1 command we cannot perform a native mapping for, and its
+    due to a perlism, and that is "import".
+
+    For now, this is named "cave_import" instead,
+
+  Hyphenated Commands
+    Hyphenated commands can't be used as method names in Perl, so we've
+    translated the hyphens to underscores in the method names.
+
+    i.e.: if you wanted "print-ids" you now want "print_ids"
+
+  Slightly Underpowered
+    This is a first-pass "Just get it working" implementation at this time,
+    and is reasonably useful for the print_ family of commands the cave
+    client provides. However, you probably do not wish to use it for more
+    complex things like calling "cave resolve" as it might cause you untold
+    sorrows while it silently buffers into a growing array and then spews
+    its contents when its finished.
+
+TODO
+    One day we'd like to have a sweeter syntax, like
+
+        $cave->print_ids({ matches => 'dev-lang/perl' })
+
+    or
+
+        $cave->print_ids({ matches => [ 'dev-lang/perl' , 'dev-lang/python' ]});
+
+    However, there are a few problems and questions to be answered, which
+    are not a problem with the existing syntax but would be a problem with a
+    possible alternative syntax.
+
+    *   Toggle Switches
+
+        There are a lot of toggle switches that don't take a parameter, and
+        while we could just do
+
+            $cave->print_commands({ all => 1 });
+
+        That means we have to get rid of the '1' before we pass the command
+        to "cave", and that is going to be difficult to do without needing
+        tight coupling. Not to mention how to handle "all => 2" and "all =>
+        1".
+
+    *   Fixed Order operations.
+
+        Some "cave" functions require operators to be ordered, so if you
+        needed to do this
+
+            cave foobar --matching foo --not --matching bar
+
+        having a structure
+
+            $cave->foobar({ matching => [ 'foo', 'bar' ]} , '--not' )
+
+        would obviously not work.
+
+            $cave->foobar([ matching => 'foo', not => matching => 'bar' ])
+
+        or anything not using a hash is going to be equally confusing,
+        especially as we can now no longer tell what is a key and what is a
+        value, so adding '--' to the front of them becomes impossible.
+
+AUTHOR
+    Kent Fredric <kentnl@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+

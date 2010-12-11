@@ -1,6 +1,4 @@
-Revision history for {{$dist->name}}
-
-{{$NEXT}}
+Revision history for Cave-Wrapper
 
 0.01000002 2010-12-11 21:14:59 Pacific/Auckland
           First version.
