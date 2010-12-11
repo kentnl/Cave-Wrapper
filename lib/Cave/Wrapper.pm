@@ -90,6 +90,7 @@ is a key and what is a value, so adding '--' to the front of them becomes imposs
 =cut
 
 use Moose;
+use namespace::autoclean;
 use Carp qw();
 
 
