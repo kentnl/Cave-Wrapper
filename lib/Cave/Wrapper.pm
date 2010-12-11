@@ -1,0 +1,121 @@
+use strict;
+use warnings;
+package Cave::Wrapper;
+
+# ABSTRACT: A Wrapper to the Paludis 'cave' Client.
+#
+
+=head1 DESCRIPTION
+
+C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
+
+This module is designed as a syntactic sugar wrapper for that client to minimise development time and clarify code.
+
+    my $cave = Cave::Wrapper->new();
+    my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
+
+
+=head1 METHODS
+
+Methods are generated entirely at runtime by introspecting the output from C<cave print-commands --all> and then
+generating the appropriate methods. This is mostly because we don't want to have to cut a new release every time
+paludis produce a new release I<just> to avoid breaking code.
+
+=cut
+
+=head1 CAVEATS
+
+=head2 Naming Collisions
+
+There exists 1 command we cannot natively map, and its due to a perlism, and that is C<import>.
+
+For now, this is named C<cave_import> instead,
+
+=head2 Hyphenated Commands
+
+Hyphenated commands can't be used as method names in Perl, so we've translated the hyphens to underscores
+in the method names.
+
+ie: if you wanted C<print-ids> you now want C<print_ids>
+
+=cut
+
+=head2 Slightly Underpowered
+
+This is a first-pass "Just get it working" implemenation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
+
+=head1 TODO
+
+One day we'd like to have a sweeter syntax, like
+
+    $cave->print_ids({ matches => 'dev-lang/perl' })
+
+or
+
+    $cave->print_ids({ matches => [ 'dev-lang/perl' , 'dev-lang/python' ]});
+
+However, there are a few problems and questions to be answered, which are not a problem with the existing
+syntax but would be a problem with possible alternative syntaxes.
+
+=over 4
+
+=item * Toggle Switches
+
+There are a lot of toggle switches that don't take a parameter, and while we could just do
+
+    $cave->print_commands({ all => 1 });
+
+That means we have to get rid of the '1' before we pass the command to C<cave>, and thats going to be diffcult to
+do without needing tight coupling. Not to mention how to handle C<< all => 2 >> and C<< all => 1 >>.
+
+=item * Fixed Order operations.
+
+Some C<cave> functions require operators to be ordered, so if you needed to do this
+
+    cave foobar --matching foo --not --matching bar
+
+having a structure
+
+    $cave->foobar({ matching => [ 'foo', 'bar' ]} , '--not' )
+
+would obviously not work.
+
+    $cave->foobar([ matching => 'foo', not => matching => 'bar' ])
+
+or anything not using a hash is going to be equally confusing, especially as we can now no longer tell what
+is a key and what is a value, so adding '--' to the front of them becomes impossible.
+
+=back
+
+=cut
+
+use Moose;
+use namespace::autoclean;
+
+
+
+sub _cave_exec_to_list {
+    my @args = @_ ;
+    my $fh;
+    open $fh, '-|', 'cave' , @args or die "Error executing 'cave': $@ $? $!";
+    my ( @output) = <$fh>;
+    chomp for @output;
+    return @output;
+}
+my %collisions = map { $_ => 1 } qw( import );
+
+for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
+    my $method = $command;
+    $method =~ s/-/_/g;
+    if( exists $collisions{$command} ){
+        $method = 'cave_' . $method;
+    }
+    __PACKAGE__->meta->add_method( $method , sub {
+            my $self = shift;
+            return _cave_exec_to_list( $command, @_ );
+    });
+}
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+1;
