@@ -17,7 +17,7 @@ This module is designed as a syntactic sugar wrapper for that client to minimise
 
 =head1 METHODS
 
-Methods are generated entirely at runtime by introspecting the output from C<cave print-commands --all> and then
+Methods are generated entirely at run-time by introspecting the output from C<cave print-commands --all> and then
 generating the appropriate methods. This is mostly because we don't want to have to cut a new release every time
 paludis produce a new release I<just> to avoid breaking code.
 
@@ -27,7 +27,7 @@ paludis produce a new release I<just> to avoid breaking code.
 
 =head2 Naming Collisions
 
-There exists 1 command we cannot natively map, and its due to a perlism, and that is C<import>.
+There exists 1 command we cannot perform a native mapping for, and its due to a perlism, and that is C<import>.
 
 For now, this is named C<cave_import> instead,
 
@@ -36,13 +36,13 @@ For now, this is named C<cave_import> instead,
 Hyphenated commands can't be used as method names in Perl, so we've translated the hyphens to underscores
 in the method names.
 
-ie: if you wanted C<print-ids> you now want C<print_ids>
+i.e.: if you wanted C<print-ids> you now want C<print_ids>
 
 =cut
 
 =head2 Slightly Underpowered
 
-This is a first-pass "Just get it working" implemenation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
+This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
 
 =head1 TODO
 
@@ -55,7 +55,7 @@ or
     $cave->print_ids({ matches => [ 'dev-lang/perl' , 'dev-lang/python' ]});
 
 However, there are a few problems and questions to be answered, which are not a problem with the existing
-syntax but would be a problem with possible alternative syntaxes.
+syntax but would be a problem with a possible alternative syntax.
 
 =over 4
 
@@ -65,7 +65,7 @@ There are a lot of toggle switches that don't take a parameter, and while we cou
 
     $cave->print_commands({ all => 1 });
 
-That means we have to get rid of the '1' before we pass the command to C<cave>, and thats going to be diffcult to
+That means we have to get rid of the '1' before we pass the command to C<cave>, and that is going to be difficult to
 do without needing tight coupling. Not to mention how to handle C<< all => 2 >> and C<< all => 1 >>.
 
 =item * Fixed Order operations.
@@ -90,15 +90,16 @@ is a key and what is a value, so adding '--' to the front of them becomes imposs
 =cut
 
 use Moose;
-use namespace::autoclean;
-
+use Carp qw();
 
 
 sub _cave_exec_to_list {
     my @args = @_ ;
     my $fh;
-    open $fh, '-|', 'cave' , @args or die "Error executing 'cave': $@ $? $!";
+    ## no critic ( ProhibitPunctuationVars )
+    open $fh, q{-|}, 'cave' , @args or Carp::croak("Error executing 'cave': $@ $? $!");
     my ( @output) = <$fh>;
+    close $fh or Carp::carp("Closing 'cave' returned an error: $@ $? $!");
     chomp for @output;
     return @output;
 }
@@ -106,7 +107,8 @@ my %collisions = map { $_ => 1 } qw( import );
 
 for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
     my $method = $command;
-    $method =~ s/-/_/g;
+    ## no critic ( RegularExpressions )
+    $method =~ s{-}{_}g;
     if( exists $collisions{$command} ){
         $method = 'cave_' . $method;
     }
