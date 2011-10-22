@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 package Cave::Wrapper;
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
@@ -93,30 +94,34 @@ use Moose;
 use namespace::autoclean;
 use Carp qw();
 
-
 sub _cave_exec_to_list {
-    my @args = @_ ;
-    my $fh;
+  my @args = @_;
+  my (@output);
+  {
     ## no critic ( ProhibitPunctuationVars )
-    open $fh, q{-|}, 'cave' , @args or Carp::croak("Error executing 'cave': $@ $? $!");
-    my ( @output) = <$fh>;
+    open my $fh, q{-|}, 'cave', @args or Carp::croak("Error executing 'cave': $@ $? $!");
+    @output = <$fh>;
     close $fh or Carp::carp("Closing 'cave' returned an error: $@ $? $!");
-    chomp for @output;
-    return @output;
+  }
+  chomp for @output;
+  return @output;
 }
 my %collisions = map { $_ => 1 } qw( import );
 
-for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
-    my $method = $command;
-    ## no critic ( RegularExpressions )
-    $method =~ s{-}{_}g;
-    if( exists $collisions{$command} ){
-        $method = 'cave_' . $method;
+for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
+  my $method = $command;
+  ## no critic ( RegularExpressions )
+  $method =~ s{-}{_}g;
+  if ( exists $collisions{$command} ) {
+    $method = 'cave_' . $method;
+  }
+  __PACKAGE__->meta->add_method(
+    $method,
+    sub {
+      my $self = shift;
+      return _cave_exec_to_list( $command, @_ );
     }
-    __PACKAGE__->meta->add_method( $method , sub {
-            my $self = shift;
-            return _cave_exec_to_list( $command, @_ );
-    });
+  );
 }
 
 __PACKAGE__->meta->make_immutable;
