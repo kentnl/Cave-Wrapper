@@ -13,6 +13,7 @@ Revision history for {{$dist->name}}
  [Internals]
  - add $AUTHORITY to packages
  - $VERSION no longer set during BUILD
+ - Minor style change with FileHandle handling.
 
  [Packaging]
  - Ship .perltidyrc
