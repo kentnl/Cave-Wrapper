@@ -1,7 +1,32 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Maintenance Release
 
-0.01000002 2010-12-11 21:14:59 Pacific/Auckland
-          First version.
+ [Dependencies::New::Runtime]
+ - strict
+ - warnings
+
+ [Dependencies::Removed::Test]
+ - English
+
+ [Internals]
+ - add $AUTHORITY to packages
+ - $VERSION no longer set during BUILD
+
+ [Packaging]
+ - Ship .perltidyrc
+ - Move Changelog form to CPAN::Changes.
+ - Update LICENSE file ( Year, Indentation, Address )
+ - Move author/release tests to xt/
+ - GIT uris now https://
+ - Move to Git versioning
+ - Move to @Author::KENTNL
+ - add x_authority
+
+ [Tests]
+ - 00-compile.t regenerated.
+
+0.01000002 2010-12-11T08:14:59Z
+ - First version.
 
