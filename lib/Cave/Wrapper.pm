@@ -1,8 +1,12 @@
 use strict;
 use warnings;
+
 package Cave::Wrapper;
 BEGIN {
-  $Cave::Wrapper::VERSION = '0.01000002';
+  $Cave::Wrapper::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Cave::Wrapper::VERSION = '0.01000003';
 }
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
@@ -15,30 +19,34 @@ use Moose;
 use namespace::autoclean;
 use Carp qw();
 
-
 sub _cave_exec_to_list {
-    my @args = @_ ;
-    my $fh;
+  my @args = @_;
+  my (@output);
+  {
     ## no critic ( ProhibitPunctuationVars )
-    open $fh, q{-|}, 'cave' , @args or Carp::croak("Error executing 'cave': $@ $? $!");
-    my ( @output) = <$fh>;
+    open my $fh, q{-|}, 'cave', @args or Carp::croak("Error executing 'cave': $@ $? $!");
+    @output = <$fh>;
     close $fh or Carp::carp("Closing 'cave' returned an error: $@ $? $!");
-    chomp for @output;
-    return @output;
+  }
+  chomp for @output;
+  return @output;
 }
 my %collisions = map { $_ => 1 } qw( import );
 
-for my $command ( _cave_exec_to_list('print-commands', '--all' ) ){
-    my $method = $command;
-    ## no critic ( RegularExpressions )
-    $method =~ s{-}{_}g;
-    if( exists $collisions{$command} ){
-        $method = 'cave_' . $method;
+for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
+  my $method = $command;
+  ## no critic ( RegularExpressions )
+  $method =~ s{-}{_}g;
+  if ( exists $collisions{$command} ) {
+    $method = 'cave_' . $method;
+  }
+  __PACKAGE__->meta->add_method(
+    $method,
+    sub {
+      my $self = shift;
+      return _cave_exec_to_list( $command, @_ );
     }
-    __PACKAGE__->meta->add_method( $method , sub {
-            my $self = shift;
-            return _cave_exec_to_list( $command, @_ );
-    });
+  );
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -54,7 +62,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 0.01000002
+version 0.01000003
 
 =head1 DESCRIPTION
 
@@ -139,7 +147,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
