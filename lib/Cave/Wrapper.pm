@@ -41,8 +41,7 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
     $method = 'cave_' . $method;
   }
   __PACKAGE__->meta->add_method(
-    $method,
-    sub {
+    $method => sub {
       my $self = shift;
       return _cave_exec_to_list( $command, @_ );
     }
