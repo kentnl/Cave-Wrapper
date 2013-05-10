@@ -8,14 +8,16 @@ use Cave::Wrapper;
 
 my @commands;
 
-is( exception {
+is(
+  exception {
     my $cave = Cave::Wrapper->new();
 
     @commands = $cave->print_commands(qw(--all));
 
-}, undef, 'Call Succeeds' );
+  },
+  undef,
+  'Call Succeeds'
+);
 
-is_deeply([ grep { $_ =~ /^print-commands$/ } @commands ], ['print-commands'], 'print-commands shows print-commands');
-
-
+is_deeply( [ grep { $_ =~ /^print-commands$/ } @commands ], ['print-commands'], 'print-commands shows print-commands' );
 

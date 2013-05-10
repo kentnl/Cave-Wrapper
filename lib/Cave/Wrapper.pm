@@ -6,7 +6,7 @@ BEGIN {
   $Cave::Wrapper::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Cave::Wrapper::VERSION = '0.01000003';
+  $Cave::Wrapper::VERSION = '0.01000004';
 }
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
@@ -41,8 +41,7 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
     $method = 'cave_' . $method;
   }
   __PACKAGE__->meta->add_method(
-    $method,
-    sub {
+    $method => sub {
       my $self = shift;
       return _cave_exec_to_list( $command, @_ );
     }
@@ -54,6 +53,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -62,13 +62,13 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 0.01000003
+version 0.01000004
 
 =head1 DESCRIPTION
 
 C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
-This module is designed as a syntactic sugar wrapper for that client to minimise development time and clarify code.
+This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
     my $cave = Cave::Wrapper->new();
     my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
@@ -147,10 +147,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

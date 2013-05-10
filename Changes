@@ -1,13 +1,72 @@
 Revision history for Cave-Wrapper
 
+0.01000004 2013-05-10T08:23:28Z
+ - Maintenance Release
+
+ [Dependencies::Added / develop requires]
+ - Pod::Coverage::TrustPod
+ - Test::CPAN::Changes 0.19
+ - Test::CPAN::Meta
+ - Test::Pod 1.41
+ - Test::Pod::Coverage 1.08
+ - version 0.9901
+
+ [Dependencies::Added / runtime requires]
+ - perl 5.006
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.3601 → 0.4005
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.3601 → 0.4005
+
+ [Dependencies::Changed / develop recommends]
+ - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803 → v1.3.0
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 → v1.7.3
+
+ [Dependencies::Changed / test requires]
+ - Test::More 0.88 → 0.98
+
+ [Documentation]
+ - Update copyright year
+ - Reindent license
+ - Update license contact address
+ - add README.mkdn
+
+ [Meta]
+ - bugtracker to github issues.
+
+ [Packaging]
+ - use test_requires from MB 0.4004
+
 0.01000003 2011-10-22T13:24:52Z
  - Maintenance Release
 
- [Dependencies::New::Runtime]
+ [Dependencies::Added / develop recommends]
+ - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803
+
+ [Dependencies::Added / develop requires]
+ - Dist::Zilla::PluginBundle::Author::KENTNL::Lite
+
+ [Dependencies::Added / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0
+
+ [Dependencies::Added / runtime requires]
  - strict
  - warnings
 
- [Dependencies::Removed::Test]
+ [Dependencies::Removed / develop recommends]
+ - Dist::Zilla::PluginBundle::KENTNL::Lite 0.01009803
+
+ [Dependencies::Removed / develop requires]
+ - Dist::Zilla::PluginBundle::KENTNL::Lite
+
+ [Dependencies::Removed / develop suggests]
+ - Dist::Zilla::PluginBundle::KENTNL 0.01017119
+
+ [Dependencies::Removed / test requires]
  - English
 
  [Internals]
