@@ -69,7 +69,7 @@ version 0.01000004
 
 C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
-This module is designed as a syntactic sugar wrapper for that client to minimise development time and clarify code.
+This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
     my $cave = Cave::Wrapper->new();
     my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
