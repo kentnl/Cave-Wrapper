@@ -10,7 +10,7 @@ package Cave::Wrapper;
 
 C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
-This module is designed as a syntactic sugar wrapper for that client to minimise development time and clarify code.
+This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
     my $cave = Cave::Wrapper->new();
     my @ids = $cave->print_ids(qw( --matches  dev-lang/perl ));
@@ -116,8 +116,7 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
     $method = 'cave_' . $method;
   }
   __PACKAGE__->meta->add_method(
-    $method,
-    sub {
+    $method => sub {
       my $self = shift;
       return _cave_exec_to_list( $command, @_ );
     }

@@ -15,7 +15,7 @@ use Test::More tests => 1;
     or BAIL_OUT('Cannot call cave --version, you probably lack the program required to use this module');
   my @lines = <$fh>;
   close $fh;
-  diag( @lines );
+  diag(@lines);
 }
 {
   open my $fh, '-|', 'cave', 'print-commands', '--all'
@@ -25,5 +25,4 @@ use Test::More tests => 1;
 }
 
 pass("All cave calls execute successfully");
-
 
