@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01100100 2014-04-11T04:19:55Z
  [00 Major]
  - Toolkit switched to EUMM
  - cave check done in Makefile.PL
