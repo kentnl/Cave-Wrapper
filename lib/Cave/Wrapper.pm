@@ -173,7 +173,7 @@ paludis produce a new release I<just> to avoid breaking code.
 
 There exists 1 command we cannot perform a native mapping for, and its due to a perlism, and that is C<import>.
 
-For now, this is named C<cave_import> instead,
+For now, this is named C<cave_import> instead.
 
 =head2 Hyphenated Commands
 

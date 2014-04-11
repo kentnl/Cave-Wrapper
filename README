@@ -28,7 +28,7 @@ CAVEATS
     There exists 1 command we cannot perform a native mapping for, and its
     due to a perlism, and that is "import".
 
-    For now, this is named "cave_import" instead,
+    For now, this is named "cave_import" instead.
 
   Hyphenated Commands
     Hyphenated commands can't be used as method names in Perl, so we've
