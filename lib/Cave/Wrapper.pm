@@ -6,7 +6,8 @@ use utf8;
 package Cave::Wrapper;
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
-#
+
+# AUTHORITY
 
 =head1 DESCRIPTION
 
