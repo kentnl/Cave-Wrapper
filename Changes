@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+ [00 Major]
+ - Toolkit switched to EUMM
+
 0.01000004 2013-05-10T08:23:28Z
  - Maintenance Release
 
