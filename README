@@ -2,7 +2,7 @@ NAME
     Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 VERSION
-    version 0.01000004
+    version 0.01100100
 
 DESCRIPTION
     "cave" is a package management client for the Paludis
@@ -28,7 +28,7 @@ CAVEATS
     There exists 1 command we cannot perform a native mapping for, and its
     due to a perlism, and that is "import".
 
-    For now, this is named "cave_import" instead,
+    For now, this is named "cave_import" instead.
 
   Hyphenated Commands
     Hyphenated commands can't be used as method names in Perl, so we've
@@ -36,7 +36,7 @@ CAVEATS
 
     i.e.: if you wanted "print-ids" you now want "print_ids"
 
-  Slightly Underpowered
+  Slightly Under-powered
     This is a first-pass "Just get it working" implementation at this time,
     and is reasonably useful for the print_ family of commands the cave
     client provides. However, you probably do not wish to use it for more
@@ -92,7 +92,7 @@ AUTHOR
     Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+    This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

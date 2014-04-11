@@ -1,21 +1,103 @@
+use 5.008;    # utf8
 use strict;
 use warnings;
+use utf8;
 
 package Cave::Wrapper;
-BEGIN {
-  $Cave::Wrapper::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Cave::Wrapper::VERSION = '0.01000004';
-}
-
+$Cave::Wrapper::VERSION = '0.01100100';
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
-#
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
 
-use Moose;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use Moo;
+use Sub::Install;
 use namespace::autoclean;
 use Carp qw();
 
@@ -40,21 +122,30 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
   if ( exists $collisions{$command} ) {
     $method = 'cave_' . $method;
   }
-  __PACKAGE__->meta->add_method(
-    $method => sub {
-      my $self = shift;
-      return _cave_exec_to_list( $command, @_ );
-    }
+  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
+  Sub::Install::install_sub(
+    {
+      code => sub {
+        shift;
+        return _cave_exec_to_list( $command, @_ );
+      },
+      as   => $method,
+      into => __PACKAGE__,
+    },
   );
 }
 
 __PACKAGE__->meta->make_immutable;
-no Moose;
+
+no Moo;
+
 1;
 
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -62,11 +153,12 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 0.01000004
+version 0.01100100
 
 =head1 DESCRIPTION
 
-C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
+C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both
+the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
 This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
@@ -85,7 +177,7 @@ paludis produce a new release I<just> to avoid breaking code.
 
 There exists 1 command we cannot perform a native mapping for, and its due to a perlism, and that is C<import>.
 
-For now, this is named C<cave_import> instead,
+For now, this is named C<cave_import> instead.
 
 =head2 Hyphenated Commands
 
@@ -94,9 +186,11 @@ in the method names.
 
 i.e.: if you wanted C<print-ids> you now want C<print_ids>
 
-=head2 Slightly Underpowered
+=head2 Slightly Under-powered
 
-This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
+This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands
+the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it
+might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
 
 =head1 TODO
 
@@ -147,7 +241,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
