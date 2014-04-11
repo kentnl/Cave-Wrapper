@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package Cave::Wrapper;
-$Cave::Wrapper::VERSION = '0.01100100';
+$Cave::Wrapper::VERSION = '0.01000005';
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 #
 
@@ -137,7 +137,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 0.01100100
+version 0.01000005
 
 =head1 DESCRIPTION
 

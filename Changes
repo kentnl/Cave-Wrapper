@@ -1,6 +1,10 @@
 Revision history for Cave-Wrapper
 
-0.01100100 2013-05-10T08:23:53Z
+0.01000005 2014-04-11T03:55:45Z
+
+ [00 Major]
+ - Toolkit switched to EUMM
+ - cave check done in Makefile.PL
 
 0.01000004 2013-05-10T08:23:28Z
  - Maintenance Release

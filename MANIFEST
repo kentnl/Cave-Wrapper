@@ -10,6 +10,8 @@ Makefile.PL
 README
 dist.ini
 lib/Cave/Wrapper.pm
+maint/perlcritic.rc.gen.pl
+perlcritic.deps
 perlcritic.rc
 t/0-have-cave.t
 t/00-compile/lib_Cave_Wrapper_pm.t
