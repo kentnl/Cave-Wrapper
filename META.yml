@@ -22,7 +22,7 @@ name: Cave-Wrapper
 provides:
   Cave::Wrapper:
     file: lib/Cave/Wrapper.pm
-    version: '0.01100000'
+    version: '0.01100100'
 requires:
   Carp: '0'
   Moose: '0'
@@ -34,7 +34,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Cave-Wrapper/issues
   homepage: https://github.com/kentfredric/Cave-Wrapper
   repository: https://github.com/kentfredric/Cave-Wrapper.git
-version: '0.01100000'
+version: '0.01100100'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.140640'

@@ -2,7 +2,7 @@ NAME
     Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 VERSION
-    version 0.01100000
+    version 0.01100100
 
 DESCRIPTION
     "cave" is a package management client for the Paludis
