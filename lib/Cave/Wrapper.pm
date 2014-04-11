@@ -96,7 +96,8 @@ is a key and what is a value, so adding '--' to the front of them becomes imposs
 
 =cut
 
-use Moose;
+use Moo;
+use Sub::Install;
 use namespace::autoclean;
 use Carp qw();
 
@@ -121,14 +122,21 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
   if ( exists $collisions{$command} ) {
     $method = 'cave_' . $method;
   }
-  __PACKAGE__->meta->add_method(
-    $method => sub {
-      my $self = shift;
-      return _cave_exec_to_list( $command, @_ );
-    }
+  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
+  Sub::Install::install_sub(
+    {
+      code => sub {
+        shift;
+        return _cave_exec_to_list( $command, @_ );
+      },
+      as   => $method,
+      into => __PACKAGE__,
+    },
   );
 }
 
 __PACKAGE__->meta->make_immutable;
-no Moose;
+
+no Moo;
+
 1;
