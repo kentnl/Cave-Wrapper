@@ -18,7 +18,7 @@ my $bundle = create_bundle('Example::Author::KENTNL');
 $bundle->configure;
 
 my @stopwords = (qw(
-  Paludis Gentoo Exherbo paludis perlism TODO  
+  Paludis Gentoo Exherbo paludis perlism TODO
 ));
 for my $wordlist (@stopwords) {
   $bundle->add_or_append_policy_field( 'Documentation::PodSpelling' => ( 'stop_words' => $wordlist ) );
