@@ -11,7 +11,8 @@ package Cave::Wrapper;
 
 =head1 DESCRIPTION
 
-C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
+C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both
+the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
 This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
@@ -33,7 +34,7 @@ paludis produce a new release I<just> to avoid breaking code.
 
 There exists 1 command we cannot perform a native mapping for, and its due to a perlism, and that is C<import>.
 
-For now, this is named C<cave_import> instead,
+For now, this is named C<cave_import> instead.
 
 =head2 Hyphenated Commands
 
@@ -44,9 +45,11 @@ i.e.: if you wanted C<print-ids> you now want C<print_ids>
 
 =cut
 
-=head2 Slightly Underpowered
+=head2 Slightly Under-powered
 
-This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
+This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands
+the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it
+might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
 
 =head1 TODO
 
