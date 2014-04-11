@@ -110,7 +110,7 @@
    "provides" : {
       "Cave::Wrapper" : {
          "file" : "lib/Cave/Wrapper.pm",
-         "version" : "0.01101000"
+         "version" : "0.01100100"
       }
    },
    "release_status" : "stable",
@@ -125,7 +125,7 @@
          "web" : "https://github.com/kentfredric/Cave-Wrapper"
       }
    },
-   "version" : "0.01101000",
+   "version" : "0.01100100",
    "x_BuiltWith" : {
       "modules" : {
          "CPAN::Meta" : "2.140640",

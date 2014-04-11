@@ -4,7 +4,7 @@ use warnings;
 use utf8;
 
 package Cave::Wrapper;
-$Cave::Wrapper::VERSION = '0.01101000';
+$Cave::Wrapper::VERSION = '0.01100100';
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
@@ -153,7 +153,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 0.01101000
+version 0.01100100
 
 =head1 DESCRIPTION
 
