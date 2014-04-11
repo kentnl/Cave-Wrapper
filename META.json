@@ -81,10 +81,12 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "Moose" : "0",
+            "Moo" : "0",
+            "Sub::Install" : "0",
             "namespace::autoclean" : "0",
-            "perl" : "5.006",
+            "perl" : "5.008",
             "strict" : "0",
+            "utf8" : "0",
             "warnings" : "0"
          }
       },
@@ -176,8 +178,9 @@
          "ExtUtils::MakeMaker" : "6.94",
          "File::Spec::Functions" : "3.47",
          "List::Util" : "1.38",
-         "Moose" : "2.1204",
+         "Moo" : "1.004002",
          "Pod::Coverage::TrustPod" : "0.100003",
+         "Sub::Install" : "0.927",
          "Test::CPAN::Changes" : "0.27",
          "Test::CPAN::Meta" : "0.23",
          "Test::Fatal" : "0.013",
@@ -187,6 +190,7 @@
          "Test::Pod::Coverage" : "1.08",
          "namespace::autoclean" : "0.15",
          "strict" : "1.08",
+         "utf8" : "1.13",
          "version" : "0.9908",
          "warnings" : "1.23"
       },

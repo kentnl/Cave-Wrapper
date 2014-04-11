@@ -6,7 +6,7 @@ check_bin('cave');
 use strict;
 use warnings;
 
-use 5.006;
+use 5.008;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -26,9 +26,11 @@ my %WriteMakefileArgs = (
   "NAME" => "Cave::Wrapper",
   "PREREQ_PM" => {
     "Carp" => 0,
-    "Moose" => 0,
+    "Moo" => 0,
+    "Sub::Install" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
+    "utf8" => 0,
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
@@ -51,11 +53,13 @@ my %FallbackPrereqs = (
   "ExtUtils::MakeMaker" => 0,
   "File::Spec::Functions" => 0,
   "List::Util" => 0,
-  "Moose" => 0,
+  "Moo" => 0,
+  "Sub::Install" => 0,
   "Test::Fatal" => 0,
   "Test::More" => "0.89",
   "namespace::autoclean" => 0,
   "strict" => 0,
+  "utf8" => 0,
   "version" => 0,
   "warnings" => 0
 );

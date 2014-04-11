@@ -36,7 +36,7 @@ CAVEATS
 
     i.e.: if you wanted "print-ids" you now want "print_ids"
 
-  Slightly Underpowered
+  Slightly Under-powered
     This is a first-pass "Just get it working" implementation at this time,
     and is reasonably useful for the print_ family of commands the cave
     client provides. However, you probably do not wish to use it for more

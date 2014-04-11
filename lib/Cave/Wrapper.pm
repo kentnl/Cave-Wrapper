@@ -1,10 +1,11 @@
+use 5.008;    # utf8
 use strict;
 use warnings;
+use utf8;
 
 package Cave::Wrapper;
 $Cave::Wrapper::VERSION = '0.01000005';
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
-#
 
 
 
@@ -90,7 +91,8 @@ $Cave::Wrapper::VERSION = '0.01000005';
 
 
 
-use Moose;
+use Moo;
+use Sub::Install;
 use namespace::autoclean;
 use Carp qw();
 
@@ -115,16 +117,22 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
   if ( exists $collisions{$command} ) {
     $method = 'cave_' . $method;
   }
-  __PACKAGE__->meta->add_method(
-    $method => sub {
-      my $self = shift;
-      return _cave_exec_to_list( $command, @_ );
+  Sub::Install::install_sub(
+    {
+      code => sub {
+        my $self = shift;
+        return _cave_exec_to_list( $command, @_ );
+      },
+      as   => $method,
+      into => __PACKAGE__,
     }
   );
 }
 
 __PACKAGE__->meta->make_immutable;
-no Moose;
+
+no Moo;
+
 1;
 
 __END__
@@ -169,7 +177,7 @@ in the method names.
 
 i.e.: if you wanted C<print-ids> you now want C<print_ids>
 
-=head2 Slightly Underpowered
+=head2 Slightly Under-powered
 
 This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
 
