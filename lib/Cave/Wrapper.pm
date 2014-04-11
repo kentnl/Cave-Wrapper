@@ -91,6 +91,9 @@ $Cave::Wrapper::VERSION = '0.01000005';
 
 
 
+
+
+
 use Moo;
 use Sub::Install;
 use namespace::autoclean;
@@ -117,15 +120,16 @@ for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
   if ( exists $collisions{$command} ) {
     $method = 'cave_' . $method;
   }
+  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
   Sub::Install::install_sub(
     {
       code => sub {
-        my $self = shift;
+        shift;
         return _cave_exec_to_list( $command, @_ );
       },
       as   => $method,
       into => __PACKAGE__,
-    }
+    },
   );
 }
 
@@ -149,7 +153,8 @@ version 0.01000005
 
 =head1 DESCRIPTION
 
-C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
+C<cave> is a package management client for the L<Paludis|http://paludis.pioto.org/> package manager available for use with both
+the L<Exherbo Linux|http://exherbo.org/> and L<Gentoo Linux|http://gentoo.org/> Distributions.
 
 This module is designed as a syntactic sugar wrapper for that client to minimize development time and clarify code.
 
@@ -179,7 +184,9 @@ i.e.: if you wanted C<print-ids> you now want C<print_ids>
 
 =head2 Slightly Under-powered
 
-This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
+This is a first-pass "Just get it working" implementation at this time, and is reasonably useful for the print_ family of commands
+the cave client provides. However, you probably do not wish to use it for more complex things like calling C<cave resolve> as it
+might cause you untold sorrows while it silently buffers into a growing array and then spews its contents when its finished.
 
 =head1 TODO
 
