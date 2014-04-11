@@ -4,6 +4,7 @@ Revision history for {{$dist->name}}
 
  [00 Major]
  - Toolkit switched to EUMM
+ - cave check done in Makefile.PL
 
 0.01000004 2013-05-10T08:23:28Z
  - Maintenance Release
