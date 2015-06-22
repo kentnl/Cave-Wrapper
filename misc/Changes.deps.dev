@@ -1,4 +1,8 @@
-0.011001
+This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and OPTIONAL )
+
+0.01100101
+
+0.01100100 2014-04-11T04:19:55Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::Authority 1.006
  - Dist::Zilla::Plugin::AutoPrereqs
