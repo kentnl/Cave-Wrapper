@@ -1,6 +1,6 @@
 Revision history for Cave-Wrapper
 
-1.00000000 2015-06-22T21:49:15Z e9f465e
+1.000000 2015-06-22T21:49:15Z e9f465e
  [Dependencies::Stats]
  - Dependencies changed since 0.01100100, see misc/*.deps* for details
  - configure: +1 ↓1 (recommends: ↑1)
