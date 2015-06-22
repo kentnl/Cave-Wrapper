@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000000 2015-06-22T21:55:52Z 0c76760
  [00 Major]
  - Changes in this release may affect hand-operated downstream packagers.
 
