@@ -9,6 +9,7 @@ This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and 
  - Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes 0.004002
  - Dist::Zilla::Plugin::Author::KENTNL::TravisCI 0.001002
  - Dist::Zilla::Plugin::CheckBin
+ - Dist::Zilla::Plugin::CopyFilesFromBuild
  - Dist::Zilla::Plugin::Git::Contributors 0.006
  - Dist::Zilla::Plugin::MetaYAML::Minimal
  - Dist::Zilla::Plugin::Prereqs::AuthorDeps
