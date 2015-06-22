@@ -1,10 +1,18 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Major]
+ - Changes in this release may affect hand-operated downstream packagers.
+
+ [01 Version Scheme Change]
+ - Version scheme is shortening mantissa to 6 places for consistency.
+ - https://questhub.io/realm/perl/quest/5388d3a9bbd0be2224000129
+ - This is the primary reason for the 1.x bump
+
  [Dependencies::Stats]
  - Dependencies changed since 0.01100100, see misc/*.deps* for details
  - configure: +1 ↓1 (recommends: ↑1)
- - develop: +13 ↑3 -4 (recommends: +1, suggests: +2 -1)
+ - develop: +15 ↑3 -6 (recommends: +1, suggests: +2 -1)
  - runtime: (recommends: +1)
  - test: +2 -3 (recommends: ↑2 ↓1 -1)
 

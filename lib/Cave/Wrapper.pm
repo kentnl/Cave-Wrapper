@@ -7,6 +7,8 @@ package Cave::Wrapper;
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 
+our $VERSION = '1.000000';
+
 # AUTHORITY
 
 =head1 DESCRIPTION

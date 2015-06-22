@@ -11,9 +11,9 @@ copyright_holder = Kent Fredric <kentfredric@gmail.com>
 
 [@Author::KENTNL]
 :version         = 2.024
-git_versions     = 1
+bumpversions     = 1
 normal_form      = numify
-mantissa         = 8
+mantissa         = 6
 toolkit          = eumm
 toolkit_hardness = soft
 copyfiles        = LICENSE
