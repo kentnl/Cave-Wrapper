@@ -1,6 +1,15 @@
 This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and OPTIONAL )
 
 0.01100101
+ [Added / develop recommends]
+ - Test::More 1.001014
+
+ [Added / develop requires]
+ - Test::EOL
+ - Test::More 0.88
+
+ [Changed / develop requires]
+ - Test::Kwalitee 1.12 → 1.21
 
 0.01100100 2014-04-11T04:19:55Z
  [Added / develop requires]
