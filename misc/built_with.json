@@ -11,6 +11,7 @@
       "Dist::Zilla::Plugin::AutoPrereqs" : "5.037",
       "Dist::Zilla::Plugin::CheckBin" : "0.007",
       "Dist::Zilla::Plugin::ConfirmRelease" : "5.037",
+      "Dist::Zilla::Plugin::CopyFilesFromBuild" : "0.151680",
       "Dist::Zilla::Plugin::Git::Check" : "2.035",
       "Dist::Zilla::Plugin::Git::Commit" : "2.035",
       "Dist::Zilla::Plugin::Git::CommitBuild" : "2.035",
