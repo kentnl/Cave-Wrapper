@@ -22,7 +22,7 @@ name: Cave-Wrapper
 provides:
   Cave::Wrapper:
     file: lib/Cave/Wrapper.pm
-    version: '1.000000'
+    version: '1.000001'
 recommends:
   Moo: '1.000008'
 requires:
@@ -37,4 +37,4 @@ resources:
   bugtracker: https://github.com/kentnl/Cave-Wrapper/issues
   homepage: https://github.com/kentnl/Cave-Wrapper
   repository: https://github.com/kentnl/Cave-Wrapper.git
-version: '1.000000'
+version: '1.000001'
