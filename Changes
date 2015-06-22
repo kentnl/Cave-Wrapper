@@ -1,11 +1,12 @@
 Revision history for Cave-Wrapper
 
-0.01100101 2015-06-22T21:19:52Z 580f975
+0.01100101 2015-06-22T21:24:17Z 4f439ed
  [Dependencies::Stats]
  - Dependencies changed since 0.01100100, see misc/*.deps* for details
  - configure: +1 ↓1 (recommends: ↑1)
- - develop: +2 ↑1 (recommends: +1)
- - test: +2 -3 (recommends: ↑3 -1)
+ - develop: +12 ↑3 -4 (recommends: +1, suggests: +2 -1)
+ - runtime: (recommends: +1)
+ - test: +2 -3 (recommends: ↑2 ↓1 -1)
 
 0.01100100 2014-04-11T04:19:55Z
  [00 Major]
@@ -73,4 +74,3 @@ Revision history for Cave-Wrapper
 
 0.01000002 2010-12-11T08:14:59Z
  - First version.
-
