@@ -4,7 +4,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 # VERSION
 
-version 1.000000
+version 1.000001
 
 # DESCRIPTION
 
