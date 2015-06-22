@@ -35,7 +35,7 @@ requires:
   utf8: '0'
   warnings: '0'
 resources:
-  bugtracker: https://github.com/kentfredric/Cave-Wrapper/issues
-  homepage: https://github.com/kentfredric/Cave-Wrapper
-  repository: https://github.com/kentfredric/Cave-Wrapper.git
+  bugtracker: https://github.com/kentnl/Cave-Wrapper/issues
+  homepage: https://github.com/kentnl/Cave-Wrapper
+  repository: https://github.com/kentnl/Cave-Wrapper.git
 version: '0.01100101'

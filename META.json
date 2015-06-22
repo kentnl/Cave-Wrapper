@@ -131,13 +131,13 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kentfredric/Cave-Wrapper/issues"
+         "web" : "https://github.com/kentnl/Cave-Wrapper/issues"
       },
-      "homepage" : "https://github.com/kentfredric/Cave-Wrapper",
+      "homepage" : "https://github.com/kentnl/Cave-Wrapper",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/kentfredric/Cave-Wrapper.git",
-         "web" : "https://github.com/kentfredric/Cave-Wrapper"
+         "url" : "https://github.com/kentnl/Cave-Wrapper.git",
+         "web" : "https://github.com/kentnl/Cave-Wrapper"
       }
    },
    "version" : "0.01100101",
