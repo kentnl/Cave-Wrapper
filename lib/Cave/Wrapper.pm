@@ -102,6 +102,8 @@ use Sub::Install;
 use namespace::autoclean;
 use Carp qw();
 
+no Moo;
+
 sub _cave_exec_to_list {
   my @args = @_;
   my (@output);
@@ -114,31 +116,41 @@ sub _cave_exec_to_list {
   chomp for @output;
   return @output;
 }
+
 my %collisions = map { $_ => 1 } qw( import );
 
-for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
-  my $method = $command;
-  ## no critic ( RegularExpressions )
-  $method =~ s{-}{_}g;
-  if ( exists $collisions{$command} ) {
-    $method = 'cave_' . $method;
-  }
-  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
-  Sub::Install::install_sub(
-    {
-      code => sub {
-        shift;
-        return _cave_exec_to_list( $command, @_ );
+our $_COMMANDS_INITIALIZED;
+
+sub _ensure_initialized {
+  return if $_COMMANDS_INITIALIZED;
+  for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
+    my $method = $command;
+    ## no critic ( RegularExpressions )
+    $method =~ s{-}{_}g;
+    if ( exists $collisions{$command} ) {
+      $method = 'cave_' . $method;
+    }
+    ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
+    Sub::Install::install_sub(
+      {
+        code => sub {
+          shift;
+          return _cave_exec_to_list( $command, @_ );
+        },
+        as   => $method,
+        into => __PACKAGE__,
       },
-      as   => $method,
-      into => __PACKAGE__,
-    },
-  );
+    );
+  }
+  $_COMMANDS_INITIALIZED = 1;
+  return;
 }
 
-__PACKAGE__->meta->make_immutable;
 
-no Moo;
+
+
+
+sub BUILD { return _ensure_initialized }
 
 1;
 
@@ -235,6 +247,8 @@ or anything not using a hash is going to be equally confusing, especially as we 
 is a key and what is a value, so adding '--' to the front of them becomes impossible.
 
 =back
+
+=for Pod::Coverage BUILD
 
 =head1 AUTHOR
 

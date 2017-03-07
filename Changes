@@ -1,7 +1,9 @@
 Revision history for Cave-Wrapper
 
-1.000001 2017-03-07T13:17:10Z 7581a19
+1.000001 2017-03-07T13:17:37Z a954fdc
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
+ - Internals: stub methods not initialized until after the first instance ( to make ENV setup easier )
+ - Bugfix: Don't call ->make_immutable in Moo .. this inflates to Moose.
 
  [Dependencies::Stats]
  - Dependencies changed since 1.000000, see misc/*.deps* for details
