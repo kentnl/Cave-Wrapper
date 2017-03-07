@@ -1,6 +1,8 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.000001
+1.000002
+
+1.000001 2017-03-07T13:17:37Z
  [Added / test requires]
  - Path::Tiny
  - Test::TempDir::Tiny
