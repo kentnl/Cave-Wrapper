@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000001 2017-03-07T13:17:37Z a954fdc
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
  - Internals: stub methods not initialized until after the first instance ( to make ENV setup easier )
  - Bugfix: Don't call ->make_immutable in Moo .. this inflates to Moose.
