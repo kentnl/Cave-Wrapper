@@ -6,7 +6,7 @@ package Cave::Wrapper;
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 
-our $VERSION = '1.000000';
+our $VERSION = '1.000001';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
@@ -102,6 +102,8 @@ use Sub::Install;
 use namespace::autoclean;
 use Carp qw();
 
+no Moo;
+
 sub _cave_exec_to_list {
   my @args = @_;
   my (@output);
@@ -114,31 +116,41 @@ sub _cave_exec_to_list {
   chomp for @output;
   return @output;
 }
+
 my %collisions = map { $_ => 1 } qw( import );
 
-for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
-  my $method = $command;
-  ## no critic ( RegularExpressions )
-  $method =~ s{-}{_}g;
-  if ( exists $collisions{$command} ) {
-    $method = 'cave_' . $method;
-  }
-  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
-  Sub::Install::install_sub(
-    {
-      code => sub {
-        shift;
-        return _cave_exec_to_list( $command, @_ );
+our $_COMMANDS_INITIALIZED;
+
+sub _ensure_initialized {
+  return if $_COMMANDS_INITIALIZED;
+  for my $command ( _cave_exec_to_list( 'print-commands', '--all' ) ) {
+    my $method = $command;
+    ## no critic ( RegularExpressions )
+    $method =~ s{-}{_}g;
+    if ( exists $collisions{$command} ) {
+      $method = 'cave_' . $method;
+    }
+    ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
+    Sub::Install::install_sub(
+      {
+        code => sub {
+          shift;
+          return _cave_exec_to_list( $command, @_ );
+        },
+        as   => $method,
+        into => __PACKAGE__,
       },
-      as   => $method,
-      into => __PACKAGE__,
-    },
-  );
+    );
+  }
+  $_COMMANDS_INITIALIZED = 1;
+  return;
 }
 
-__PACKAGE__->meta->make_immutable;
 
-no Moo;
+
+
+
+sub BUILD { return _ensure_initialized }
 
 1;
 
@@ -154,7 +166,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 1.000000
+version 1.000001
 
 =head1 DESCRIPTION
 
@@ -236,13 +248,15 @@ is a key and what is a value, so adding '--' to the front of them becomes imposs
 
 =back
 
+=for Pod::Coverage BUILD
+
 =head1 AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2017 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

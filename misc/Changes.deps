@@ -1,6 +1,14 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-0.01100101
+1.000001
+ [Added / test requires]
+ - Path::Tiny
+ - Test::TempDir::Tiny
+
+ [Changed / test requires]
+ - Test::More 0.89 → 0
+
+1.000000 2015-06-22T21:55:52Z
  [Added / configure requires]
  - perl 5.006
 
