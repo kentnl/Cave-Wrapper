@@ -6,7 +6,7 @@ package Cave::Wrapper;
 
 # ABSTRACT: A Wrapper to the Paludis 'cave' Client.
 
-our $VERSION = '1.000001';
+our $VERSION = '1.000002';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
@@ -166,7 +166,7 @@ Cave::Wrapper - A Wrapper to the Paludis 'cave' Client.
 
 =head1 VERSION
 
-version 1.000001
+version 1.000002
 
 =head1 DESCRIPTION
 

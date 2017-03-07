@@ -1,5 +1,7 @@
 Revision history for Cave-Wrapper
 
+1.000002 2017-03-07T13:19:11Z a9c406f
+
 1.000001 2017-03-07T13:17:37Z a954fdc
  - Bugfix: Avoid test failures with -Ddefault_inc_excludes_dot
  - Internals: stub methods not initialized until after the first instance ( to make ENV setup easier )
