@@ -5,8 +5,10 @@ author:
 build_requires:
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
+  Path::Tiny: '0'
   Test::Fatal: '0'
   Test::More: '0'
+  Test::TempDir::Tiny: '0'
   perl: '5.006'
 configure_requires:
   Devel::CheckBin: '0'

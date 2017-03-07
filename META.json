@@ -114,13 +114,16 @@
          "recommends" : {
             "CPAN::Meta" : "2.120900",
             "ExtUtils::MakeMaker" : "7.00",
+            "Path::Tiny" : "0.058",
             "Test::More" : "0.99"
          },
          "requires" : {
             "ExtUtils::MakeMaker" : "0",
             "File::Spec" : "0",
+            "Path::Tiny" : "0",
             "Test::Fatal" : "0",
             "Test::More" : "0",
+            "Test::TempDir::Tiny" : "0",
             "perl" : "5.006"
          }
       }

@@ -59,6 +59,7 @@
       "ExtUtils::MakeMaker" : "7.24",
       "File::Spec" : "3.66",
       "Moo" : "2.003000",
+      "Path::Tiny" : "0.104",
       "Pod::Coverage::TrustPod" : "0.100003",
       "Software::License::Perl_5" : "0.103012",
       "Sub::Install" : "0.928",
@@ -71,6 +72,7 @@
       "Test::More" : "1.302073",
       "Test::Pod" : "1.51",
       "Test::Pod::Coverage" : "1.10",
+      "Test::TempDir::Tiny" : "0.016",
       "namespace::autoclean" : "0.28",
       "strict" : "1.11",
       "warnings" : "1.37"

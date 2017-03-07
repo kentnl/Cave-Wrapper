@@ -7,6 +7,13 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Software::License::Perl_5
  - Test::MinimumVersion
 
+ [Added / test recommends]
+ - Path::Tiny 0.058
+
+ [Added / test requires]
+ - Path::Tiny
+ - Test::TempDir::Tiny
+
  [Changed / develop requires]
  - Dist::Zilla::Plugin::Test::Compile::PerFile 0 → 0.003902
  - Test::More 0.88 → 0.96
