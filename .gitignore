@@ -1,2 +1,3 @@
-.build
-Cave-Wrapper*
+/.build
+/Cave-Wrapper-*
+/tmp/
